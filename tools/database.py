@@ -7,4 +7,22 @@ class Database:
         self.__connect()
 
     def __connect(self):
-        pymysql.connect(**self.config)
+        return pymysql.connect(**self.config)
+
+    def query(self, sql_query, *args):
+        conn = self.__connect()
+        with conn.cursor() as cursor:
+            cursor.execute(sql_query, args)
+            result = cursor.fetchone()
+        conn.commit()
+        conn.close()
+        return result
+
+    def insert(self, sql_delete):
+        pass
+
+    def update(self, sql_update):
+        pass
+
+    def delete(self, table, primary_key):
+        pass
