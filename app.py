@@ -1,5 +1,6 @@
 from flask import Flask
 
+from tools.database import Database
 
 app = Flask(__name__)
 
@@ -18,6 +19,7 @@ def register_bps():
 
 
 if __name__ == '__main__':
-    app.config.from_pyfile('app.cfg')
+    app.config.from_object('tools.config.DevelopmentConfig')
+    db = Database(app.config[''])
     register_bps()
     app.run(host='0.0.0.0')

@@ -25,7 +25,7 @@ class Database:
         sql = 'delete from ' + table + ' where id=%s'
         return self.__run(sql, primary_key)
 
-    def __find(self, sql_query, is_one, *args):
+    def __find(self, sql_query, is_one, args):
         try:
             conn = self.__connect()
             with conn.cursor() as cursor:
@@ -38,7 +38,7 @@ class Database:
         finally:
             conn.close()
 
-    def __run(self, sql, *args):
+    def __run(self, sql, args):
         try:
             conn = self.__connect()
             with conn.cursor() as cursor:

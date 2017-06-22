@@ -1,6 +1,4 @@
-from flask import Blueprint, render_template, current_app, request, session
-
-from tools.database import Database
+from flask import Blueprint, render_template, request, session, url_for, redirect
 
 admin = Blueprint('admin', __name__)
 
@@ -9,12 +7,12 @@ admin = Blueprint('admin', __name__)
 def login():
     username = request.form['username']
     password = request.form['password']
-    db = Database(current_app.config['DB_CONFIG'])
-    curr_user = db.query("SELECT * FROM user WHERE username=%s AND password =%s", username, password)
+    curr_user = db.find_all("SELECT * FROM user WHERE username=%s AND password =%s ORDER BY id DESC", username,
+                            password)
     if curr_user is not None:
         session['is_login'] = True
         session['user'] = curr_user
-        return 'login'
+        return redirect(url_for('links.show_links'))
     else:
         error = 'Invalid username or password!'
     return render_template('login.html', error=error)
