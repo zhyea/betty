@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, current_app, request
+from flask import Blueprint, render_template, current_app, request, session
 
 from tools.database import Database
 
@@ -10,8 +10,10 @@ def login():
     username = request.form['username']
     password = request.form['password']
     db = Database(current_app.config['DB_CONFIG'])
-    result = db.query("SELECT * FROM user WHERE username=%s AND password =%s", username, password)
-    if result is not None:
+    curr_user = db.query("SELECT * FROM user WHERE username=%s AND password =%s", username, password)
+    if curr_user is not None:
+        session['is_login'] = True
+        session['user'] = curr_user
         return 'login'
     else:
         error = 'Invalid username or password!'
