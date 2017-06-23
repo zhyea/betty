@@ -1,8 +1,8 @@
 {% extends "layout/admin_header.html" %}
 {% block body %}
 <ul class="entries">
-    {% for entry in entries %}
-    <li><h2>{{ entry.title }}</h2>{{ entry.text|safe }}</li>
+    {% for u in users %}
+    <li><h2>{{ u.username }}</h2>{{ u.display_name|safe }}</li>
     {% else %}
     <li><em>Unbelievable. No entries here so far</em></li>
     {% endfor %}

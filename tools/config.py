@@ -31,7 +31,7 @@ class DevelopmentConfig(Config):
         'port': 3306,
         'user': 'root',
         'password': 'root',
-        'db': 'dorado',
+        'db': 'betty',
         'charset': 'utf8',
         'cursorclass': pymysql.cursors.DictCursor
     }

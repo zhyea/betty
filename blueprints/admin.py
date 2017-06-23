@@ -1,5 +1,7 @@
 from flask import Blueprint, render_template, request, session, url_for, redirect
 
+from tools.database import db
+
 admin = Blueprint('admin', __name__)
 
 
@@ -12,7 +14,7 @@ def login():
     if curr_user is not None:
         session['is_login'] = True
         session['user'] = curr_user
-        return redirect(url_for('links.show_links'))
+        return redirect(url_for('user.show_users'))
     else:
         error = 'Invalid username or password!'
     return render_template('login.html', error=error)

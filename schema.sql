@@ -19,6 +19,10 @@ CREATE TABLE user (
   ENGINE = MyISAM
   DEFAULT CHARSET = utf8;
 
+insert into user (username, password, display_name, add_time)
+    values ('admin', 'admin', 'robin', CURRENT_DATE)
+
+
 -- 分类表
 CREATE TABLE category (
   id           INT UNIQUE         NOT NULL PRIMARY KEY      AUTO_INCREMENT,
