@@ -46,10 +46,10 @@ class Database(Singleton):
                     result = cursor.fetchone()
                 else:
                     result = cursor.fetchall()
+                return result
         finally:
             if conn is not None:
                 conn.close()
-        return result
 
     def __run(self, sql, args):
         conn = None
@@ -58,10 +58,10 @@ class Database(Singleton):
             with conn.cursor() as cursor:
                 result = cursor.execute(sql, args)
             conn.commit()
+            return result
         finally:
             if conn is not None:
                 conn.close()
-        return result
 
 
 db = Database()
